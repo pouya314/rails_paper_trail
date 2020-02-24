@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @widget.name %>
+</p>
+
+<%= link_to 'Edit', edit_widget_path(@widget) %> |
+<%= link_to 'Back', widgets_path %>
+
+<hr>
+
+<div class="container">
+  <h1>History</h1>
+
+  <ul>
+    <% @widget.versions.each do |version| %>
+      <li>
+        <%= l(version.created_at, format: "%-d.%m.%Y %H:%M:%S %Z") %> by user ID: <%= version.whodunnit %><br/>
+        Event ID: <%= version.id %><br/>
+        <b>Target:</b> <%= version.item_type %>
+        <small>(id: <%= version.item_id %>)</small>; <b>action</b> <%= version.event %>;<br/>
+		<div>
+		  Changeset:
+		  <pre><%= version.changeset %></pre>
+		</div>
+      </li>
+    <% end %>
+  </ul>
+</div>
